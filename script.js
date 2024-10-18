@@ -1,6 +1,12 @@
+
+
 document.getElementById('calculate').addEventListener('click', () => {
     let balance = document.getElementById('balance').value;
     let remainingValue = document.getElementById('remaining').value;
+
+    let rate = document.querySelector('input[name="charge"]:checked').value;
+    console.log(rate);
+    rate = parseFloat(rate);
 
     if (!balance) {
         alert('Please Enter Current Balance');
@@ -33,13 +39,13 @@ document.getElementById('calculate').addEventListener('click', () => {
         return;
     }
     balance -= remainingValue;
-    const cashout = (balance / (1 + 0.0149)).toFixed(2);
-    const charge = (cashout * 0.0149).toFixed(2);
-    const remain = ((balance + remainingValue) - (parseFloat(cashout) + parseFloat(charge))).toFixed(2);
+    const cashout = balance / (1 + rate);
+    const charge = cashout * rate;
+    const remain = (balance + remainingValue) - (parseFloat(cashout) + parseFloat(charge));
 
-    document.getElementById('cashout').innerText = cashout;
-    document.getElementById('charge').innerText = charge;
-    document.getElementById('reBal').innerText = remain;
+    document.getElementById('cashout').innerText = cashout.toFixed(2);
+    document.getElementById('charge').innerText = charge.toFixed(2);
+    document.getElementById('reBal').innerText = remain.toFixed(2);
 });
 
 const b = document.getElementById('b')
