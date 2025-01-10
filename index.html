@@ -31,41 +31,22 @@
 
                 <div class="option">
                     <div id="b-option" style="display: flex;">
-                        <div>
-                            <input type="radio" name="charge" id="Prio" value="0.0149" checked>
-                            <label for="Prio">Prio</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="charge" id="bM" value="0.018">
-                            <label for="bM">Marchent</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="charge" id="bATM" value="0.007">
-                            <label for="bATM">ATM</label>
-                        </div>
+                        <button class="charge-option" id="bPrio" onclick="isSelected('bPrio')">Prio</button>
+                        <button class="charge-option" id="bM" onclick="isSelected('bM')">Merchant</button>
+                        <button class="charge-option" id="bATM" onclick="isSelected('bATM')">ATM</button>
                     </div>
 
                     <div id="n-option" style="display: none;">
-                        <div>
-                            <input type="radio" name="charge" id="nM" value="0.0125" checked>
-                            <label for="nM">Marchent</label>
-                        </div>
+                        <button class="charge-option" id="nM" onclick="isSelected('nM')">Merchant</button>
                     </div>
 
                     <div id="r-option" style="display: none;">
-                        <div>
-                            <input type="radio" name="charge" id="rM" value="0.015" checked>
-                            <label for="rM">Marchent</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="charge" id="rATM" value="0.01">
-                            <label for="rATM">ATM</label>
-                        </div>
+                        <button class="charge-option" id="rM" onclick="isSelected('rM')">Merchant</button>
+                        <button class="charge-option" id="rATM" onclick="isSelected('rATM')">ATM</button>
                     </div>
                 </div>
+
+                <div>Cashout charge <span id="show_charge">___</span> taka per thousand</div>
 
                 <button id="calculate">Calculate</button>
             </div>
