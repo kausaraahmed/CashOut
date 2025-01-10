@@ -1,9 +1,10 @@
 body {
-    background-color: lightgrey;
-    font-family: 'Arial', sans-serif;
+    background-color: aliceblue;
+    font-family: "Dosis", serif;
     margin: 0 auto;
     padding: 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .container {
@@ -11,16 +12,30 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    animation: popup 0.4s cubic-bezier(0, 0, 0.21, 0.1);
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.7);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .content {
+    background-image: radial-gradient(#4a4a4a 0.8px, #ef83545a 0.8px);
+    background-size: 20px 20px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 70vh;
+    min-height: 70vh;
+    height: fit-content;
     width: 70%;
-    background-color: lightyellow;
-    border: 2px solid darkgray;
+    border: 2px solid aliceblue;
+    box-shadow: 4px 4px #141619cc;
     border-radius: 10px;
 }
 
@@ -35,7 +50,6 @@ input {
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid lightgray;
 }
 
 .inputs {
@@ -44,20 +58,19 @@ input {
 }
 
 .details {
-    color: darkgray;
-    font-style: italic;
+    color: #14161970;
     font-size: 0.9rem;
-
+    font-weight: bold;
 }
 
 .vl {
-    border-left: 1px solid lightgray;
-    height: 70%;
+    border-left: 2px solid #14161999;
+    height: 50vh;
 }
 
 #calculate {
-    padding: 5px 10px;
-    margin-top: 5%;
+    padding: 8px 14px;
+    margin-top: 8%;
     border: 1px solid darkgray;
     border-radius: 5px;
     background-color: lightblue;
@@ -65,7 +78,7 @@ input {
     cursor: pointer;
     width: 30%;
     text-align: center;
-    box-shadow: 2px 2px 5px darkgray;
+    box-shadow: 2px 2px #141619;
     transition: 0.4s ease-in-out;
 }
 
@@ -75,15 +88,19 @@ input {
 }
 
 img {
-    width: 150px;
-    height: 50px;
+    width: 120px;
+    height: 60px;
     margin: 0 auto;
     cursor: pointer;
-    border: 1px solid darkgray;
+    border: 1px solid transparent;
+    border-bottom: 2px solid #141619;
+    margin: 5px;
+    transition: 0.4s ease-in-out;
 }
 
 img:hover {
-    border: 1px solid black;
+    border: 1px solid gray;
+    border-bottom: 2px solid #141619;
 }
 
 .operatorbox {
@@ -132,8 +149,31 @@ img:hover {
     align-items: center;
     width: 100%;
 }
+.output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+.output p{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #141619;
+    background-color: #ef8354cc;
+    padding: 15px;
+    margin: 10% 0;
+    width: 100%;
+    border: 1px solid #141619;
+    border-radius: 5px;
+}
 
 @media screen and (max-width: 768px) {
+    .body {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
     .content {
         flex-direction: column;
         width: 80%;
@@ -160,6 +200,15 @@ img:hover {
 
     .charge-option {
         font-size: 0.95rem;
+    }
+
+    .output{
+        margin-top: 10%;
+    }
+
+    .output p{
+        font-size: 0.95rem;
+        margin: 5% 0;
     }
 
 }
