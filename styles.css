@@ -1,5 +1,13 @@
+:root {
+    --primary-color: #ef8354;
+    --secondary-color: #141619;
+    --light-bg: aliceblue;
+    --box-shadow: 2px 2px #00000090;
+    --hover-shadow: 1px 1px #00000090;
+}
+
 body {
-    background-color: aliceblue;
+    background-color: var(--light-bg);
     font-family: "Dosis", serif;
     margin: 0 auto;
     padding: 0;
@@ -34,8 +42,8 @@ body {
     min-height: 70vh;
     height: fit-content;
     width: 70%;
-    border: 2px solid aliceblue;
-    box-shadow: 4px 4px #141619cc;
+    border: 2px solid var(--light-bg);
+    box-shadow: 4px 4px var(--secondary-color);
     border-radius: 10px;
 }
 
@@ -49,7 +57,14 @@ body {
 input {
     padding: 10px;
     margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .inputs {
@@ -58,13 +73,13 @@ input {
 }
 
 .details {
-    color: #14161970;
+    color: rgba(20, 22, 25, 0.7);
     font-size: 0.9rem;
     font-weight: bold;
 }
 
 .vl {
-    border-left: 2px solid #14161999;
+    border-left: 2px solid rgba(20, 22, 25, 0.6);
     height: 50vh;
 }
 
@@ -78,13 +93,14 @@ input {
     cursor: pointer;
     width: 30%;
     text-align: center;
-    box-shadow: 2px 2px #141619;
-    transition: 0.4s ease-in-out;
+    box-shadow: var(--box-shadow);
+    transition: background-color 0.3s ease, border 0.3s ease;
 }
 
 #calculate:hover {
     background-color: lightgreen;
     border: 1px solid black;
+    box-shadow: var(--hover-shadow);
 }
 
 img {
@@ -93,14 +109,15 @@ img {
     margin: 0 auto;
     cursor: pointer;
     border: 1px solid transparent;
-    border-bottom: 2px solid #141619;
+    border-bottom: 2px solid var(--secondary-color);
     margin: 5px;
-    transition: 0.4s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    will-change: transform, opacity;
 }
 
 img:hover {
-    border: 1px solid gray;
-    border-bottom: 2px solid #141619;
+    transform: scale(1.05);
+    box-shadow: var(--hover-shadow);
 }
 
 .operatorbox {
@@ -121,15 +138,15 @@ img:hover {
     padding: 6px 16px;
     margin-bottom: 5%;
     border-radius: 8px;
-    background-color: #87785F;
+    background-color: #87785f;
     border: 2px solid #ececec;
-    box-shadow: 2px 2px #00000090;
+    box-shadow: var(--box-shadow);
     transition: 0.3s ease-in-out;
     animation: slideDown 0.2s ease-in-out;
 }
 
 .charge-option:hover {
-    box-shadow: 1px 1px #00000090;
+    box-shadow: var(--hover-shadow);
 }
 
 @keyframes slideDown {
@@ -149,6 +166,7 @@ img:hover {
     align-items: center;
     width: 100%;
 }
+
 .output {
     display: flex;
     justify-content: center;
@@ -156,24 +174,20 @@ img:hover {
     flex-direction: column;
     height: 100%;
 }
-.output p{
+
+.output p {
     font-size: 1rem;
     font-weight: bold;
-    color: #141619;
-    background-color: #ef8354cc;
+    color: var(--secondary-color);
+    background-color: rgba(239, 131, 84, 0.8);
     padding: 15px;
     margin: 10% 0;
     width: 100%;
-    border: 1px solid #141619;
+    border: 1px solid var(--secondary-color);
     border-radius: 5px;
 }
 
 @media screen and (max-width: 768px) {
-    .body {
-        font-size: 1.1rem;
-        font-weight: 500;
-    }
-
     .content {
         flex-direction: column;
         width: 80%;
@@ -202,13 +216,12 @@ img:hover {
         font-size: 0.95rem;
     }
 
-    .output{
+    .output {
         margin-top: 10%;
     }
 
-    .output p{
+    .output p {
         font-size: 0.95rem;
         margin: 5% 0;
     }
-
 }

@@ -1,4 +1,4 @@
-var rateDict = {
+const rateDict = {
     bPrio: 0.0149,
     bM: 0.0185,
     bATM: 0.0185,
@@ -7,13 +7,14 @@ var rateDict = {
     rATM: 0.009,
 };
 
-selectedRate = 0.0;
-const b = document.getElementById('b')
-const n = document.getElementById('n')
-const r = document.getElementById('r')
-const b_option = document.getElementById('b-option')
-const n_option = document.getElementById('n-option')
-const r_option = document.getElementById('r-option')
+let selectedRate = 0.0;
+
+const b = document.getElementById('b');
+const n = document.getElementById('n');
+const r = document.getElementById('r');
+const b_option = document.getElementById('b-option');
+const n_option = document.getElementById('n-option');
+const r_option = document.getElementById('r-option');
 
 function setDefault() {
     selectedRate = 0.0;
@@ -28,90 +29,88 @@ function setDefault() {
 function isSelected(id) {
     setDefault();
     selectedRate = rateDict[id];
-    document.getElementById('show_charge').innerText = selectedRate * 1000;
+    document.getElementById('show_charge').innerText = (selectedRate * 1000).toFixed(1);
     document.getElementById(id).style.opacity = 1;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    b.style.opacity = '1'
-    n.style.opacity = '0.2'
-    r.style.opacity = '0.2'
+    b.style.opacity = '1';
+    n.style.opacity = '0.2';
+    r.style.opacity = '0.2';
     setDefault();
 });
 
-document.getElementById('b').addEventListener('click', () => {
-    b.style.opacity = '1'
-    n.style.opacity = '0.2'
-    r.style.opacity = '0.2'
-    b_option.style.display = 'flex'
-    n_option.style.display = 'none'
-    r_option.style.display = 'none'
+b.addEventListener('click', () => {
+    b.style.opacity = '1';
+    n.style.opacity = '0.2';
+    r.style.opacity = '0.2';
+    b_option.style.display = 'flex';
+    n_option.style.display = 'none';
+    r_option.style.display = 'none';
     setDefault();
 });
 
-document.getElementById('n').addEventListener('click', () => {
-    n.style.opacity = '1'
-    b.style.opacity = '0.2'
-    r.style.opacity = '0.2'
-    b_option.style.display = 'none'
-    n_option.style.display = 'flex'
-    r_option.style.display = 'none'
+n.addEventListener('click', () => {
+    n.style.opacity = '1';
+    b.style.opacity = '0.2';
+    r.style.opacity = '0.2';
+    b_option.style.display = 'none';
+    n_option.style.display = 'flex';
+    r_option.style.display = 'none';
     setDefault();
 });
 
-document.getElementById('r').addEventListener('click', () => {
-    r.style.opacity = '1'
-    n.style.opacity = '0.2'
-    b.style.opacity = '0.2'
-    b_option.style.display = 'none'
-    n_option.style.display = 'none'
-    r_option.style.display = 'flex'
+r.addEventListener('click', () => {
+    r.style.opacity = '1';
+    n.style.opacity = '0.2';
+    b.style.opacity = '0.2';
+    b_option.style.display = 'none';
+    n_option.style.display = 'none';
+    r_option.style.display = 'flex';
     setDefault();
 });
 
 document.getElementById('calculate').addEventListener('click', () => {
-    let balance = document.getElementById('balance').value;
-    let remainingValue = document.getElementById('remaining').value;
-    let rate = selectedRate;
-    if (rate == 0.0) {
-        alert('Please Select Rate');
+    const balanceInput = document.getElementById('balance').value;
+    var remainingValueInput = document.getElementById('remaining').value;
+
+    if (!balanceInput) {
+        alert('Please enter the current balance.');
         return;
     }
 
-    if (!balance) {
-        alert('Please Enter Current Balance');
-        return;
-    }
-    if (!remainingValue) {
-        alert('Please Enter Remaining Value');
+    if (selectedRate === 0.0) {
+        alert('Please select a Merchant type.');
         return;
     }
 
-    if (balance < 0) {
-        alert('Current Balance cannot be negative');
-        return;
+    if (!remainingValueInput) {
+        remainingValueInput = '0.0';
     }
-    if (remainingValue < 0) {
-        alert('Remaining Value cannot be negative');
-        return;
-    }
+
+    let balance, remainingValue;
 
     try {
-        balance = parseFloat(balance);
+        balance = parseFloat(balanceInput);
+        remainingValue = parseFloat(remainingValueInput);
+
+        if (balance < 0) {
+            alert('Current balance cannot be negative.');
+            return;
+        }
+        if (remainingValue < 0) {
+            alert('Remaining value cannot be negative.');
+            return;
+        }
     } catch (error) {
-        alert('Current Balance must be a number');
+        alert('Both current balance and remaining value must be valid numbers.');
         return;
     }
-    try {
-        remainingValue = parseFloat(remainingValue);
-    } catch (error) {
-        alert('Remaining Value must be a number');
-        return;
-    }
+
     balance -= remainingValue;
-    const cashout = balance / (1 + rate);
-    const charge = cashout * rate;
-    const remain = (balance + remainingValue) - (parseFloat(cashout) + parseFloat(charge));
+    const cashout = balance / (1 + selectedRate);
+    const charge = cashout * selectedRate;
+    const remain = (balance + remainingValue) - (cashout + charge);
 
     document.getElementById('cashout').innerText = cashout.toFixed(2);
     document.getElementById('charge').innerText = charge.toFixed(2);
